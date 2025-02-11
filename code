@@ -1,0 +1,177 @@
+def convertir_longueur(valeur, unite_source, unite_cible):
+    # Conversion en mètres (unité de base)
+    if unite_source == "km":
+        valeur_metres = valeur * 1000
+    elif unite_source == "m":
+        valeur_metres = valeur
+    elif unite_source == "cm":
+        valeur_metres = valeur / 100
+    elif unite_source == "mm":
+        valeur_metres = valeur / 1000
+    elif unite_source == "mi":  # miles
+        valeur_metres = valeur * 1609.34
+    elif unite_source == "ft":  # pieds
+        valeur_metres = valeur * 0.3048
+    elif unite_source == "in":  # pouces
+        valeur_metres = valeur * 0.0254
+    else:
+        raise ValueError("Unité source non reconnue.")
+    
+    # Conversion de mètres à l'unité cible
+    if unite_cible == "km":
+        return valeur_metres / 1000
+    elif unite_cible == "m":
+        return valeur_metres
+    elif unite_cible == "cm":
+        return valeur_metres * 100
+    elif unite_cible == "mm":
+        return valeur_metres * 1000
+    elif unite_cible == "mi":  # miles
+        return valeur_metres / 1609.34
+    elif unite_cible == "ft":  # pieds
+        return valeur_metres / 0.3048
+    elif unite_cible == "in":  # pouces
+        return valeur_metres / 0.0254
+    else:
+        raise ValueError("Unité cible non reconnue.")
+
+def convertir_masse(valeur, unite_source, unite_cible):
+    # Conversion en kilogrammes (unité de base)
+    if unite_source == "kg":
+        valeur_kg = valeur
+    elif unite_source == "g":
+        valeur_kg = valeur / 1000
+    elif unite_source == "mg":
+        valeur_kg = valeur / 1_000_000
+    elif unite_source == "lb":  # livres
+        valeur_kg = valeur * 0.453592
+    elif unite_source == "oz":  # onces
+        valeur_kg = valeur * 0.0283495
+    else:
+        raise ValueError("Unité source non reconnue.")
+    
+    # Conversion de kilogrammes à l'unité cible
+    if unite_cible == "kg":
+        return valeur_kg
+    elif unite_cible == "g":
+        return valeur_kg * 1000
+    elif unite_cible == "mg":
+        return valeur_kg * 1_000_000
+    elif unite_cible == "lb":  # livres
+        return valeur_kg / 0.453592
+    elif unite_cible == "oz":  # onces
+        return valeur_kg / 0.0283495
+    else:
+        raise ValueError("Unité cible non reconnue.")
+
+def convertir_temperature(valeur, unite_source, unite_cible):
+    # Conversion en Celsius (unité de base)
+    if unite_source == "C":
+        valeur_celsius = valeur
+    elif unite_source == "F":
+        valeur_celsius = (valeur - 32) * 5 / 9
+    elif unite_source == "K":
+        valeur_celsius = valeur - 273.15
+    else:
+        raise ValueError("Unité source non reconnue.")
+    
+    # Conversion de Celsius à l'unité cible
+    if unite_cible == "C":
+        return valeur_celsius
+    elif unite_cible == "F":
+        return valeur_celsius * 9 / 5 + 32
+    elif unite_cible == "K":
+        return valeur_celsius + 273.15
+    else:
+        raise ValueError("Unité cible non reconnue.")
+
+def convertir_volume(valeur, unite_source, unite_cible):
+    # Conversion en litres (unité de base)
+    if unite_source == "L":
+        valeur_litres = valeur
+    elif unite_source == "mL":
+        valeur_litres = valeur / 1000
+    elif unite_source == "gal":  # gallons
+        valeur_litres = valeur * 3.78541
+    elif unite_source == "qt":  # quarts
+        valeur_litres = valeur * 0.946353
+    elif unite_source == "pt":  # pints
+        valeur_litres = valeur * 0.473176
+    else:
+        raise ValueError("Unité source non reconnue.")
+    
+    # Conversion de litres à l'unité cible
+    if unite_cible == "L":
+        return valeur_litres
+    elif unite_cible == "mL":
+        return valeur_litres * 1000
+    elif unite_cible == "gal":  # gallons
+        return valeur_litres / 3.78541
+    elif unite_cible == "qt":  # quarts
+        return valeur_litres / 0.946353
+    elif unite_cible == "pt":  # pints
+        return valeur_litres / 0.473176
+    else:
+        raise ValueError("Unité cible non reconnue.")
+
+def afficher_menu():
+    print("1. Convertir une longueur")
+    print("2. Convertir une masse")
+    print("3. Convertir une température")
+    print("4. Convertir un volume")
+    print("5. Quitter")
+
+def main():
+    while True:
+        afficher_menu()
+        choix = input("Choisissez une option (1-5) : ")
+        
+        if choix == "1":
+            valeur = float(input("Entrez la valeur à convertir : "))
+            unite_source = input("Unité source (km, m, cm, mm, mi, ft, in) : ")
+            unite_cible = input("Unité cible (km, m, cm, mm, mi, ft, in) : ")
+            try:
+                resultat = convertir_longueur(valeur, unite_source, unite_cible)
+                print(f"Résultat : {resultat} {unite_cible}")
+            except ValueError as e:
+                print(e)
+        
+        elif choix == "2":
+            valeur = float(input("Entrez la valeur à convertir : "))
+            unite_source = input("Unité source (kg, g, mg, lb, oz) : ")
+            unite_cible = input("Unité cible (kg, g, mg, lb, oz) : ")
+            try:
+                resultat = convertir_masse(valeur, unite_source, unite_cible)
+                print(f"Résultat : {resultat} {unite_cible}")
+            except ValueError as e:
+                print(e)
+        
+        elif choix == "3":
+            valeur = float(input("Entrez la valeur à convertir : "))
+            unite_source = input("Unité source (C, F, K) : ")
+            unite_cible = input("Unité cible (C, F, K) : ")
+            try:
+                resultat = convertir_temperature(valeur, unite_source, unite_cible)
+                print(f"Résultat : {resultat} {unite_cible}")
+            except ValueError as e:
+                print(e)
+        
+        elif choix == "4":
+            valeur = float(input("Entrez la valeur à convertir : "))
+            unite_source = input("Unité source (L, mL, gal, qt, pt) : ")
+            unite_cible = input("Unité cible (L, mL, gal, qt, pt) : ")
+            try:
+                resultat = convertir_volume(valeur, unite_source, unite_cible)
+                print(f"Résultat : {resultat} {unite_cible}")
+            except ValueError as e:
+                print(e)
+        
+        elif choix == "5":
+            print("Au revoir !")
+            break
+        
+        else:
+            print("Option invalide. Veuillez choisir une option entre 1 et 5.")
+
+if __name__ == "__main__":
+    main()
